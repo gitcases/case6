@@ -1,0 +1,10 @@
+build/
+composer.lock
+vendor/
+.idea/
+infection.log
+summary.log
+debug.log
+grumphp.yml
+phpspec.yml
+infection.json
