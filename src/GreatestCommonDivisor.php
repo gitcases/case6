@@ -14,29 +14,23 @@ class GreatestCommonDivisor
      * @param int $start
      *   The number to start from.
      *
-     * @return array
+     * @return \Traversable
      *   The divisors of the number.
      */
-    public function factors($num, $start = 2)
+    public function factors(int $num, int $start = 1): \Traversable
     {
         echo 'Fooooooooooooooo';
-        
-        $return = [1, $num];
 
-        $end = \ceil(\sqrt($num)) + 1;
-
-        for ($i = $start; $i < $end; ++$i) {
-            if (0 !== $num % $i) {
-                continue;
-            }
-
-            $return[$i] = $i;
-            $return[$num / $i] = $num / $i;
+        if (0 === $num % $start) {
+            yield $start => $start;
+            yield $num / $start => $num / $start;
         }
 
-        \asort($return);
-
-        return \array_values($return);
+        if ($start + 1 !== $num / $start) {
+            if (\ceil(\sqrt($num)) >= $start) {
+                yield from $this->factors($num, $start + 1);
+            }
+        }
     }
 
     /**
@@ -45,14 +39,27 @@ class GreatestCommonDivisor
      * @param int ...$x
      *   The numbers.
      *
-     * @return false|int
+     * @return int
      *   The greatest common divisor.
      */
-    public function gcd(...$x)
+    public function gcd(...$x): int
     {
-        $x = \array_map([$this, 'factors'], $x);
+        if (1 >= \count($x)) {
+            throw new \InvalidArgumentException('At least two parameters are required.');
+        }
 
-        $intersect = \array_intersect(...$x);
+        $intersect = \array_intersect(
+            ...\array_map(
+                '\iterator_to_array',
+                \array_map(
+                    [
+                        $this,
+                        'factors',
+                    ],
+                    $x
+                )
+            )
+        );
 
         return \end($intersect);
     }
