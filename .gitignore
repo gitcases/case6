@@ -8,3 +8,4 @@ debug.log
 grumphp.yml
 phpspec.yml
 infection.json
+per-mutator.md
