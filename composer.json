@@ -1,0 +1,10 @@
+{
+    "require-dev": {
+        "drupol/php-conventions": "^1.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "drupol\\case6\\": "./src/"
+        }
+    }
+}
