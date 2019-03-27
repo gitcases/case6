@@ -4,6 +4,12 @@
     "require-dev": {
         "drupol/php-conventions": "^1.2"
     },
+    "config": {
+        "platform": {
+            "php": "7.2"
+        },
+        "sort-packages": true
+    },
     "extra": {
         "grumphp": {
             "config-default-path": "vendor/drupol/php-conventions/config/php7/grumphp.yml"

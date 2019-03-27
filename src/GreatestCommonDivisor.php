@@ -19,6 +19,8 @@ class GreatestCommonDivisor
      */
     public function factors($num, $start = 2)
     {
+        echo 'Fooooooooooooooo';
+        
         $return = [1, $num];
 
         $end = \ceil(\sqrt($num)) + 1;
